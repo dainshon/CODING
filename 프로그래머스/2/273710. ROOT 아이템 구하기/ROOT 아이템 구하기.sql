@@ -1,0 +1,5 @@
+select A.ITEM_ID, ITEM_NAME
+from ITEM_INFO A left outer join ITEM_TREE B
+on A.ITEM_ID = B.ITEM_ID
+where PARENT_ITEM_ID IS NULL
+order by A.ITEM_ID ASC
