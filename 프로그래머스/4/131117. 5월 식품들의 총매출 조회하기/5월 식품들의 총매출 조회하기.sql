@@ -1,0 +1,14 @@
+-- 코드를 입력하세요
+Select PRODUCT_ID, PRODUCT_NAME, SUM(TOTAL) AS TOTAL
+from(
+select A.PRODUCT_ID, A.PRODUCT_NAME, PRICE*AMOUNT AS TOTAL
+from FOOD_PRODUCT A INNER JOIN 
+(
+SELECT PRODUCT_ID, AMOUNT -- , date_format('2022-05-11',"%Y-%m"), date_format(PRODUCE_DATE,"%Y-%m")
+from FOOD_ORDER
+where date_format(PRODUCE_DATE,"%Y-%m") = date_format('2022-05-11',"%Y-%m")
+    ) B 
+    ON A.PRODUCT_ID = B.PRODUCT_ID
+) C
+GROUP BY PRODUCT_ID
+ORDER BY TOTAL DESC, PRODUCT_ID ASC
